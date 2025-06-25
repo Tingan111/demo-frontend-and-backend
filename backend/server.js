@@ -1,16 +1,16 @@
 const express = require("express");
 const cors = require("cors")
 const {Pool} =require("pg")
-
+require('dotenv').config();
 const app=express();
 const port=4000;
 
 const pool=new Pool({
-  user:"postgres",
-  host:"localhost",
-  database:"todo_db",
-  password:"wersa123",
-  port:5432,
+  user: process.env.PGUSER,
+  host: process.env.PGHOST,
+  database: process.env.PGDATABASE,
+  password: process.env.PGPASSWORD,
+  port: process.env.PGPORT,
 });
 
 app.use(cors());
@@ -39,6 +39,19 @@ app.get("/api/todos",async(req,res)=>{
 app.post("/api/todos",async(req,res)=>{
   const result= await pool.query("")
 })
+app.put('/todos/:id', (req, res) => {
+  const { id } = req.params;
+  const { title } = req.body;
+
+  // 找出那筆資料 → 修改 → 回傳新的資料
+  const index = todos.findIndex(item => item.id === parseInt(id));
+  if (index !== -1) {
+    todos[index].title = title;
+    res.json(todos[index]);
+  } else {
+    res.status(404).json({ error: '找不到資料' });
+  }
+});
 app.listen(port,()=>{
     console.log(`Server is running on http://localhost:${port}`);
 });
