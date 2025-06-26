@@ -31,7 +31,7 @@ function App(){
         value={text} 
         onChange={(e) => setText(e.target.value)} />
         <button  
-        
+        className="ml-4 bg-sky-500 rounded-sm outline-2 outline-blue-600/100"
         onClick={handleSubmit}>
           新增</button>
       <ul>
