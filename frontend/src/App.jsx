@@ -1,16 +1,17 @@
 import {useEffect, useState} from "react";
+
 function App(){
     const [todos, setTodos] = useState([]);
     const [text, setText] = useState("");
     const [message,setMessage]=useState("");
     useEffect(()=>{
-        fetch("http://localhost:4000/api/todos")
+        fetch("http://localhost:4000/api/todos/read")
           .then((res) => res.json())
           .then(setTodos);
     }, []);
     const handleSubmit = async () => {
       if(!text.trim())return setMessage("請輸入內容") ;      
-      const res=await fetch("http://localhost:4000/api/todos",{
+      const res=await fetch("http://localhost:4000/api/todos/create",{
         method:"POST",
         headers:{ 
           "Content-Type": "application/json" },
@@ -25,8 +26,14 @@ function App(){
       <div>
       <h1>Todo list</h1>
       <div>{message}</div>
-        <input value={text} onChange={(e) => setText(e.target.value)} />
-        <button onClick={handleSubmit}>新增</button>
+        <input 
+        className="border-2 border-gray-400" 
+        value={text} 
+        onChange={(e) => setText(e.target.value)} />
+        <button  
+        
+        onClick={handleSubmit}>
+          新增</button>
       <ul>
         {todos.map((todo)=>(
           <li key={todo.id}>{todo.text}</li>

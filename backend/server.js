@@ -16,7 +16,7 @@ const pool=new Pool({
 app.use(cors());
 app.use(express.json());
 
-app.post("/api/todos",async (req,res)=>{
+app.post("/api/todos/create",async (req,res)=>{
   try{const { text } =req.body;
   if(!text) return res.status(400).json({error:"text 欄位是必要的"})
   const result = await pool.query("INSERT INTO todos (text) VALUES ($1) RETURNING *",[text]);
@@ -27,31 +27,12 @@ app.post("/api/todos",async (req,res)=>{
   }
 });
 
-app.post("api/todos",async(req,res)=>{
-  const result =await pool.query()
-})
-
-app.get("/api/todos",async(req,res)=>{
+app.get("/api/todos/read",async(req,res)=>{
   const result = await pool.query("SELECT * FROM todos ORDER BY id DESC");
   res.json(result.rows);
 })
 
-app.post("/api/todos",async(req,res)=>{
-  const result= await pool.query("")
-})
-app.put('/todos/:id', (req, res) => {
-  const { id } = req.params;
-  const { title } = req.body;
 
-  // 找出那筆資料 → 修改 → 回傳新的資料
-  const index = todos.findIndex(item => item.id === parseInt(id));
-  if (index !== -1) {
-    todos[index].title = title;
-    res.json(todos[index]);
-  } else {
-    res.status(404).json({ error: '找不到資料' });
-  }
-});
 app.listen(port,()=>{
     console.log(`Server is running on http://localhost:${port}`);
 });
