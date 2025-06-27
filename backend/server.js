@@ -31,7 +31,16 @@ app.get("/api/todos/read",async(req,res)=>{
   const result = await pool.query("SELECT * FROM todos ORDER BY id DESC");
   res.json(result.rows);
 })
-
+app.delete("/api/todos/delete/:id",async(req,res)=>{
+  const {id}=req.params;
+  try{
+    await pool.query("DELETE FROM todos WHERE id= $1",[id])
+    res.json({success: true, message:"刪除成功"});
+  } catch(err){
+    console.error(err);
+    res.status(500).json({ success:false,message:"伺服器錯誤"})    
+  }
+});
 
 app.listen(port,()=>{
     console.log(`Server is running on http://localhost:${port}`);
