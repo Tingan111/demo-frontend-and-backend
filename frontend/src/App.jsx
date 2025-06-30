@@ -7,13 +7,15 @@ function App(){
     const [editId, setEditId] = useState(null);
     const [editText, setEditText] = useState("");
 
-    
+    //讀取功能開始
     useEffect(()=>{
         fetch("http://localhost:4000/api/todos/read")
           .then((res) => res.json())
           .then(setTodos);
     }, []);
-
+    //讀取功能結束
+    
+    //新增功能開始
     const handleSubmit = async () => {
       if(!text.trim())return setMessage("請輸入內容") ;      
       const res=await fetch("http://localhost:4000/api/todos/create",{
@@ -27,7 +29,9 @@ function App(){
       setText("");
       setMessage("");
     };
+    //新增功能開始
 
+    //刪除功能結束
     const handleDelete  = async(id)=>{
       if(!id){
         console.warn("id是undefined，刪除動作被終止");
@@ -44,11 +48,14 @@ function App(){
       }
     };
 
+    //編輯功能開始
     const handleEdit = (todo) => {
       setEditId(todo.id);
       setEditText(todo.text);
     };
+    //編輯功能結束
 
+    //更新功能開始
     const handleUpdate=async (id)=>{
       if(!editText.trim()) return setMessage("請輸入編輯內容");
 
@@ -76,13 +83,13 @@ function App(){
     setEditId(null);
     setEditText("");
     setMessage("");
-    console.log("res", res.status);
-console.log("result", result);
   }}
+    //編輯功能結束
     return(
       <div>
       <h1>Todo list</h1>
       <div>{message}</div>
+        
         <input 
         className="border-2 border-gray-400" 
         value={text} 
@@ -121,7 +128,7 @@ console.log("result", result);
         <>
           {todo.text}
           <button
-            className="ml-4 bg-sky-300 rounded-sm  text-white rounded-sm border-2 border-gray-500 hover:sky-400"
+            className="ml-4 bg-sky-300 rounded-sm  text-white rounded-sm border-2 border-gray-500 hover:bg-sky-400"
             onClick={() => handleEdit(todo)}
           >
             編輯
