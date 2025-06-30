@@ -42,6 +42,22 @@ app.delete("/api/todos/delete/:id",async(req,res)=>{
   }
 });
 
+app.put("/api/todos/edit/:id",async(req,res)=>{
+  const {id}=req.params;
+  const {text}=req.body;
+  try {
+    const result =await pool.query(
+      "UPDATE todos SET text= $1 WHERE id =$2 RETURNING *",
+      [text, id]
+    );
+    res.json({ success:true,todo: result.rows[0]})
+  } catch(err){
+      console.error(err);
+      res.status(500).json({ success:false});
+     }
+   }
+);
+
 app.listen(port,()=>{
     console.log(`Server is running on http://localhost:${port}`);
 });
