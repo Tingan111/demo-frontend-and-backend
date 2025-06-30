@@ -60,11 +60,11 @@ function App(){
         body:JSON.stringify({text:editText.trim()}),
     });
     if (!res.ok) {
-      const text = await res.text();
-      console.error("錯誤 HTML 回傳內容：", text);
-      setMessage("更新失敗：後端無此路由");
-      return;
-    }
+  const text = await res.text();
+  console.error("錯誤 HTML 回傳內容：", text);
+  setMessage("更新失敗：後端無此路由");
+  return;
+}
     const result = await res.json();
 
     if(result.success){
@@ -88,7 +88,7 @@ console.log("result", result);
         value={text} 
         onChange={(e) => setText(e.target.value)} />
         <button  
-        className="ml-4 bg-sky-500 rounded-sm outline-2 outline-block-600/100"
+        className="ml-4 bg-sky-300 text-white rounded-sm border-2 border-gray-500 hover:bg-sky-400"
         onClick={handleSubmit}>
           新增</button>
           <ul>
@@ -102,13 +102,13 @@ console.log("result", result);
             onChange={(e) => setEditText(e.target.value)}
           />
           <button
-            className="ml-2 bg-green-500 text-white px-2 py-1 rounded"
+            className="ml-4 bg-green-300 rounded-sm  text-white rounded-sm border-2 border-gray-500 hover:bg-green-300"
             onClick={() => handleUpdate(todo.id)}
           >
             更新
           </button>
           <button
-            className="ml-2 bg-gray-400 text-white px-2 py-1 rounded"
+            className="ml-4 bg-gray-300 rounded-sm  text-white rounded-sm border-2 border-gray-500 hover:bg-gray-400"
             onClick={() => {
               setEditId(null);
               setEditText("");
@@ -121,13 +121,13 @@ console.log("result", result);
         <>
           {todo.text}
           <button
-            className="ml-4 bg-sky-400 rounded-sm outline-2 outline-block-600/100"
+            className="ml-4 bg-sky-300 rounded-sm  text-white rounded-sm border-2 border-gray-500 hover:sky-400"
             onClick={() => handleEdit(todo)}
           >
             編輯
           </button>
           <button
-            className="ml-4 bg-red-400 rounded-sm outline-2 outline-block-600/100"
+            className="ml-4 bg-red-300 rounded-sm  text-white rounded-sm border-2 border-gray-500 hover:bg-red-400"
             onClick={() => handleDelete(todo.id)}
           >
             刪除
