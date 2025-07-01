@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const bcypt = require("bcypt");
-const poll = ".../db";
+const pool = ".../db";
 
 router.post("/register", async (req, res) => {
   const { email, password } = req.body;
