@@ -21,6 +21,8 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
   try {
+    console.log("接收到登入請求：", email, password); // 🔍 檢查輸入
+
     const result = await pool.query("SELECT * FROM users WHERE email =$1", [
       email,
     ]);
@@ -36,6 +38,8 @@ router.post("/login", async (req, res) => {
     });
     res.json({ token });
   } catch (err) {
+    console.error("登入錯誤：", err); // 🔥 錯誤訊息打印出來
+
     res.status(500).json({ error: "登入失敗", detail: err.message });
   }
 });

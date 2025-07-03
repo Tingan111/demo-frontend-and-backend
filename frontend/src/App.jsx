@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import RegisterForm from "./RegisterForm";
+import LoginForm from "./LoginForm";
 function App() {
   const [todos, setTodos] = useState([]);
   const [text, setText] = useState("");
@@ -91,6 +92,9 @@ function App() {
     <div>
       <div className="App">
         <RegisterForm />
+      </div>
+      <div className="App">
+        <LoginForm />
       </div>
       <h1>Todo list</h1>
       <div>{message}</div>
