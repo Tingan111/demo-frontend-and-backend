@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import RegisterForm from "./RegisterForm";
 function App() {
   const [todos, setTodos] = useState([]);
   const [text, setText] = useState("");
@@ -89,6 +89,9 @@ function App() {
   //編輯功能結束
   return (
     <div>
+      <div className="App">
+        <RegisterForm />
+      </div>
       <h1>Todo list</h1>
       <div>{message}</div>
 
