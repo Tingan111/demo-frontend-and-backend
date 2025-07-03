@@ -9,7 +9,11 @@ pool
   .connect()
   .then(() => console.log("✅ 資料庫連線成功"))
   .catch((err) => console.error("❌ 資料庫連線失敗", err));
-app.use(cors());
+//限制cors只有自己的網域能讀取
+  app.use(cors({
+  origin: "http://localhost:5173"
+
+}));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use("/api", authRoutes);
