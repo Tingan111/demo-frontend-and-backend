@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import RegisterForm from "./RegisterForm";
-import LoginForm from "./LoginForm";
+import Login from "./Login";
 function App() {
   const [todos, setTodos] = useState([]);
   const [text, setText] = useState("");
@@ -94,7 +94,7 @@ function App() {
         <RegisterForm />
       </div>
       <div className="App">
-        <LoginForm />
+        <Login />
       </div>
       <h1>Todo list</h1>
       <div>{message}</div>

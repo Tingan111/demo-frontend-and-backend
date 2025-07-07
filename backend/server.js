@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const authRoutes = require("./routes/auth");
+const postRoutes =require("./routes/post");
 const port = 4000;
 const pool = require("./db");
 pool
@@ -63,7 +64,6 @@ app.put("/api/todos/edit/:id", async (req, res) => {
   }
 });
 
-const postRoutes =require("./routes/post");
 app.use("/api./posts", postRoutes);
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
