@@ -63,6 +63,8 @@ app.put("/api/todos/edit/:id", async (req, res) => {
   }
 });
 
+const postRoutes =require("./routes/post");
+app.use("/api./posts", postRoutes);
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
