@@ -7,6 +7,14 @@ function App() {
   const [message, setMessage] = useState("");
   const [editId, setEditId] = useState(null);
   const [editText, setEditText] = useState("");
+  const [posts, setPosts] = useState([]);
+  //假文章
+  useEffect(() => {
+    fetch("http://localhost:3001/api/posts")
+      .then((res) => res.json())
+      .then((data) => setPosts(data));
+  }, []);
+  //假文章結束
 
   //讀取功能開始
   useEffect(() => {
@@ -156,6 +164,16 @@ function App() {
           </li>
         ))}
       </ul>
+
+      <div>
+        <h1>部落格文章列表</h1>
+        {posts.map((post) => (
+          <div key={post.id}>
+            <h2>{post.title}</h2>
+            <p>{post.content.slice(0, 30)}...</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
